@@ -1,6 +1,6 @@
 # 📘 Splunk Learning Commands & Notes
 
-This repository contains key Splunk SPL commands with brief explanations for quick reference and learning.
+This file contains key Splunk SPL commands with brief explanations for quick reference and learning.
 
 ---
 
@@ -35,8 +35,8 @@ index="_internal"
 | stats list(source) as source by sourcetype
 ```
 * Returns all (including duplicates) source values for each sourcetype.
-- values() ➜ Only unique values
-- list() ➜ All values, including duplicates
+    - values() ➜ Only unique values
+    - list() ➜ All values, including duplicates
 ### 🧮 eval Command (Used for calculations or conditionals)
 ### 5. Convert Bytes to KB
 ```
@@ -66,6 +66,18 @@ index="main" sourcetype="linux_bootlog"
 | where count > threshold
 ```
 * search is used to filter results directly (e.g., count > 10).
-- where is used to compare two fields/expressions (e.g., count > threshold).
-- Use search for simple field filtering.
-- Use where for comparing field values or expressions.
+    - where is used to compare two fields/expressions (e.g., count > threshold).
+    - Use search for simple field filtering.
+    - Use where for comparing field values or expressions.
+
+### 9. Rename Fields with table and rename
+```
+index="main" sourcetype="linux_bootlog"
+| table rhost, user 
+| rename rhost as "Host Name", user as user_nam
+```
+* table selects and displays only the rhost and user fields.
+    - rename changes:
+    - rhost ➜ "Host Name" (note the space and quotes)
+    - user ➜ user_nam (new alias for user field)
+* 🔄 Use rename to improve field readability or map field names to desired labels in reports and dashboards.
